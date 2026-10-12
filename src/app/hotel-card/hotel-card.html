@@ -1,0 +1,14 @@
+<div class="hotel-card">
+    <h2>{{hotel.title}}</h2>
+    <p>{{hotel.desc}}</p>
+    <p>{{hotel.bedrooms}} Bedrooms</p>
+    <p>{{hotel.bathroom}} Bathrooms</p>
+    <div class="hotel-card-btm">
+        <img src="{{hotel.image}}" alt="{{hotel.title}}">
+        @if(hotel.price < 1200){
+            <div class="special offer">Special Offer</div>
+        }
+        <button (click)="onAddToWishList()">Add to Wishlist</button>
+        <button [disabled]="hotel.soldOut" (click)="onHotelBooked()">Book Hotel</button>
+    </div>
+</div>

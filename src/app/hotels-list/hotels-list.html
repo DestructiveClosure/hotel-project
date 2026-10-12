@@ -1,0 +1,66 @@
+<h1 class="available">{{ title() }}</h1>
+<div class="hotel-wrapper">
+    <!-- 
+    
+    Initializing wishlist with 0 items at first
+    Conditionally checking if there are any wishlist items in the array. 
+    -->
+    @if(wishlist.length > 0){
+        <div class="wishlist-banner">
+            <span class="wishlist-heart">💓</span>
+            <!-- 
+            We loop through the wishlist to see of there are any hotel objects
+            inside of our wishlist.. hotel could be x
+            The child component uses the @Output decorator combined with an EventEmitter to send events, and the parent catches them using event binding.
+
+            What is the purpose of @Input decorator in Angular?
+            to mark a property in a child component as one that can receive data from its parent
+            It allows data to be passed from a parent to a child component.
+            Parent-child communication in Angular is the interaction between a parent component and a nested child component, where the parent passes data to the child and the child can communicate back to the parent.
+            -->
+            My Wishlist: 
+            @for(hotel of wishlist; track hotel.title){
+                <!-- Display each course title that has been added -->
+                 <div class="wishlist-wrapper">
+                    <span class="wishlist-item">{{hotel.title}}</span>
+                 </div>
+            }
+        </div>
+    }
+
+        @for(hotel of hotels; track hotel.id){
+            <!-- <div class="hotel-item">
+                <h2>{{hotel.title}}</h2>
+                <p>{{hotel.desc}}</p>
+                <p>{{hotel.bedrooms}} Bedrooms</p>
+                <p>{{hotel.bathroom}} Bathrooms</p>
+                <div class="hotel-item-btm">
+                    <img src="{{hotel.image}}" alt="{{hotel.title}}">
+                    @if(hotel.price < 1200){
+                        <div class="special offer">Special Offer</div>
+                    }
+                    <button (click)="viewDetails(hotel.title)">View Details</button>
+                </div>
+            </div> -->
+            <!-- 
+            We used property binding to add a component inside 
+            another component to dynamically read from an array of data 
+            -->
+            <!-- 
+            In the parent component we will add the event binding syntax to bind the hotelBooked event
+            (hotelBooked)="onHotelBooked($event)
+
+            onHotelBooked(hotel: any): void{
+                console.log(`Parent heard about booking: ${hotel.title} with a ${hotel.desc}`)
+            }
+
+            is a behaviour inside of the class of hotelList (Parent)
+
+            -->
+            <!-- 
+            
+            When using @Ouput we have to ensure that we use the method from the hotel-list but the prop binder from Output in the child component
+            -->
+            <app-hotel-card [hotel]="hotel" (hotelBooked)="onHotelBooked($event)" (wishListAdded)="onWishlistAdded($event)"></app-hotel-card>
+        }    
+</div>
